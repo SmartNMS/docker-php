@@ -2,7 +2,7 @@
 PHP 7.4 FPM for developer with some extensions and composer preinstalled.
 
 # Supported tags and respective Dockerfile links
-- [7.4-fpm, 7-fpm, fpm](https://github.com/SmartNMS/docker-php/7.4/fpm)
+- [7.4-fpm, 7-fpm, fpm](https://github.com/SmartNMS/docker-php/tree/master/7.4/fpm)
 
 ## PHP Modules
 ```txt
