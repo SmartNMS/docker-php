@@ -1,7 +1,7 @@
 #
-# docker build -t smartnms/php:7.4-fpm .
+# docker build -t smartnms/php:7.3-fpm .
 #
-FROM php:7.4-fpm
+FROM php:7.3-fpm
 
 LABEL maintainer="wingsun97@qq.com"
 
@@ -22,9 +22,9 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 # Install gd extension
 RUN docker-php-ext-configure gd \
-    --with-jpeg \
-    --with-webp \
-    --with-freetype \
+    --with-freetype-dir=/usr/include/ \
+    --with-jpeg-dir=/usr/include/ \
+    --with-webp-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
     
 # Install pdo_mysql bcmath zip intl extension

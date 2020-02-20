@@ -1,7 +1,12 @@
+# PHP 7.3 FPM
+PHP 7.3 FPM for developer with some extensions and composer preinstalled.
+
+## Dockerfile
+```txt
 #
-# docker build -t smartnms/php:7.4-fpm .
+# docker build -t smartnms/php:7.3-fpm .
 #
-FROM php:7.4-fpm
+FROM php:7.3-fpm
 
 LABEL maintainer="wingsun97@qq.com"
 
@@ -22,9 +27,9 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 # Install gd extension
 RUN docker-php-ext-configure gd \
-    --with-jpeg \
-    --with-webp \
-    --with-freetype \
+    --with-freetype-dir=/usr/include/ \
+    --with-jpeg-dir=/usr/include/ \
+    --with-webp-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
     
 # Install pdo_mysql bcmath zip intl extension
@@ -47,3 +52,49 @@ RUN curl -sS https://getcomposer.org/installer | php \
 # Clean up
 RUN apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+```
+
+## PHP Modules
+```txt
+bcmath
+Core
+ctype
+curl
+date
+dom
+fileinfo
+filter
+ftp
+gd
+hash
+iconv
+imagick
+intl
+json
+libxml
+mbstring
+mongodb
+mysqlnd
+openssl
+pcre
+PDO
+pdo_mysql
+pdo_sqlite
+Phar
+posix
+readline
+redis
+Reflection
+session
+SimpleXML
+sodium
+SPL
+sqlite3
+standard
+tokenizer
+xml
+xmlreader
+xmlwriter
+zip
+zlib
+```
