@@ -16,6 +16,7 @@ RUN apt-get update \
     libzip-dev \
     libicu-dev \
     libmagickwand-dev \
+    libldap2-dev \
     && apt-get clean
 
 # Set locale to utf-8
@@ -29,8 +30,13 @@ RUN docker-php-ext-configure gd \
     --with-freetype \
     && docker-php-ext-install -j$(nproc) gd
     
+# Install ldap extension
+RUN docker-php-ext-configure ldap \
+    --with-libdir=lib/x86_64-linux-gnu \
+    && docker-php-ext-install -j$(nproc) ldap
+
 # Install pdo_mysql bcmath zip intl extension
-RUN docker-php-ext-install pdo_mysql bcmath zip intl
+RUN docker-php-ext-install mysqli pdo_mysql bcmath zip intl
 
 # Install imagick redis mongodb extension
 RUN pecl install imagick && \
@@ -48,7 +54,6 @@ RUN curl -sS https://getcomposer.org/installer | php \
 
 # Clean up
 RUN apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
 ```
 
 ## PHP Modules
@@ -68,6 +73,7 @@ iconv
 imagick
 intl
 json
+ldap
 libxml
 mbstring
 mongodb
